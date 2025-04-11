@@ -10,6 +10,7 @@ const { css } = createStitches({
       primary: "#8bd3dd",
       primaryDark: "#5db6c2",
       text: "#001858",
+      selectedLang: "#1e90ff",
     },
     fonts: {
       body: "'Comic Neue', cursive",
@@ -77,7 +78,29 @@ const LangSelect = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "0.75rem",
+  gap: "0.5rem",
+});
+
+const LangButton = styled("button", {
+  padding: "0.4rem 0.8rem",
+  fontSize: "0.9rem",
+  backgroundColor: "$primary",
+  color: "$text",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontFamily: "$body",
+  '&:hover': {
+    backgroundColor: "$primaryDark",
+  },
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: "$selectedLang",
+        color: "white",
+      }
+    }
+  }
 });
 
 const Scrambled = styled("div", {
@@ -143,17 +166,19 @@ function App() {
     <Container>
       <Card>
         <LangSelect>
-          <label htmlFor="lang">Language:</label>
-          <select id="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
-            <option value="en">English</option>
-            <option value="pt">Português</option>
-            <option value="it">Italiano</option>
-            <option value="de">Deutsch</option>
-          </select>
+          {Object.keys(translations).map((code) => (
+            <LangButton key={code} selected={lang === code} onClick={() => setLang(code)}>
+              {code.toUpperCase()}
+            </LangButton>
+          ))}
         </LangSelect>
 
-        <h1>{t.welcome}</h1>
-        <p>{t.intro}</p>
+        {!revealed && (
+          <>
+            <h1>{t.welcome}</h1>
+            <p>{t.intro}</p>
+          </>
+        )}
 
         {!revealed && (
           <>
