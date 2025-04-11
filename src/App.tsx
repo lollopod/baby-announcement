@@ -40,7 +40,7 @@ const { css } = createStitches({
   },
 });
 
-const babyName = "SOPHIA";
+const babyName = "LUCA";
 
 const translations = {
   en: {
@@ -83,7 +83,6 @@ const translations = {
 
 
 
-const scrambledName = babyName.split("").sort(() => 0.5 - Math.random()).join("");
 
 const Container = styled("div", {
   minHeight: "100vh",
@@ -289,7 +288,22 @@ function App() {
       link.href = canvas.toDataURL();
       link.click();
     }
+
   };
+  const scrambledName = (name: string) => {
+    if (name.length < 2) return name;
+  
+    let shuffled = name;
+    while (shuffled === name) {
+      const arr = name.split('');
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      shuffled = arr.join('');
+    }
+    return shuffled;
+  }
 
   return (
     <Container>
@@ -312,7 +326,7 @@ function App() {
         {!revealed && (
           <>
             <Photo src={parentsIllustration} alt="Cartoon of parents" style={{ marginBottom: "1.5rem" }} />
-            <Scrambled>{scrambledName}</Scrambled>
+            <Scrambled>{scrambledName(babyName)}</Scrambled>
             <Input
               value={guess}
               onChange={(e) => {
