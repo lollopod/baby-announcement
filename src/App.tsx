@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { styled, createStitches } from "@stitches/react";
-import { CalendarDays, Ruler, Weight, Download } from "lucide-react";
+import { CalendarDays, Ruler, Weight, Download, LucideExternalLink } from "lucide-react";
 import html2canvas from "html2canvas";
 import { keyframes } from "@stitches/react";
 
@@ -197,23 +197,27 @@ const ErrorBanner = styled("div", {
 
 const OverlayInfo = styled("ul", {
   position: "absolute",
-  top: "1rem",
-  right: "0.5rem",
+  top: "4%",
+  right: "4%",
   backgroundColor: "rgba(255, 255, 255, 0.8)",
-  padding: "1rem 1.5rem",
-  borderRadius: "16px",
+  padding: "0.5rem 0.75rem",
+  borderRadius: "12px",
   listStyle: "none",
-  textAlign: "left",
-  fontSize: "1rem",
+  textAlign: "center",
+  fontSize: "0.55vw", // scales with image width
   color: "$text",
   boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+  maxWidth: "10%",
+  maxHeight: "10%",
 });
 
 const OverlayItem = styled("li", {
   display: "flex",
-  alignItems: "left",
-  gap: "0.5rem",
-  marginBottom: "0.5rem",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "0.3rem",
+  marginBottom: "0.3rem",
+  whiteSpace: "nowrap",
 });
 
 const DownloadButton = styled("button", {
@@ -249,6 +253,7 @@ function App() {
   const [revealed, setRevealed] = useState(false);
   const [wrongGuess, setWrongGuess] = useState(false);
   const cardRef = useRef(null);
+  const exportRef = useRef(null);
   const [shakeInput, setShakeInput] = useState(false);
 
   useEffect(() => {
@@ -277,8 +282,8 @@ function App() {
   };
 
   const handleDownload = async () => {
-    if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current);
+    if (exportRef.current) {
+      const canvas = await html2canvas(exportRef.current);
       const link = document.createElement("a");
       link.download = "baby-announcement.png";
       link.href = canvas.toDataURL();
@@ -332,14 +337,42 @@ function App() {
         {revealed && (
           <div style={{ position: "relative" }}>
             <h2>{t.correct}</h2>
-            <PhotoWrapper ref={cardRef}>
+            <ul style={{
+                marginTop: "2rem",
+                padding: 0,
+                listStyle: "none",
+                fontSize: "1rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.75rem",
+                color: "#001858",
+                alignItems: "center",        // Center items horizontally
+                justifyContent: "center",
+                textAlign: "center"
+              }}>
+                <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <CalendarDays size={20} /> {t.details[0]}
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Weight size={20} /> {t.details[1]}
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Ruler size={20} /> {t.details[2]}
+                </li>
+              </ul>
+            <PhotoWrapper>
               <Photo src={babyPhoto} alt="Our baby"/>
-              <OverlayInfo>
-                <OverlayItem><CalendarDays size={18} />{t.details[0]}</OverlayItem>
-                <OverlayItem><Weight size={18} />{t.details[1]}</OverlayItem>
-                <OverlayItem><Ruler size={18} />{t.details[2]}</OverlayItem>
-              </OverlayInfo>
             </PhotoWrapper>
+            <div ref={exportRef} style={{ position: "absolute", left: "-9999px", top: 0 }}>
+              <PhotoWrapper>
+                <Photo src={babyPhoto} alt="Our baby" />
+                  <OverlayInfo>
+                    <OverlayItem><CalendarDays size="2em" />{t.details[0]}</OverlayItem>
+                    <OverlayItem><Weight size="2em" />{t.details[1]}</OverlayItem>
+                    <OverlayItem><Ruler size="2em" />{t.details[2]}</OverlayItem>
+                  </OverlayInfo>
+              </PhotoWrapper>
+            </div>
             <DownloadButton onClick={handleDownload}>
               <Download size={24} />
             </DownloadButton>
