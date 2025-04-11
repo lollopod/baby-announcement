@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { styled, createStitches } from "@stitches/react";
+import parentsIllustration from "./assets/parents-illustration.png";
+
 
 const { css } = createStitches({
   theme: {
@@ -13,7 +15,7 @@ const { css } = createStitches({
       selectedLang: "#1e90ff",
     },
     fonts: {
-      body: "'Comic Neue', cursive",
+      body: "'Trebuchet MS', sans-serif",
     },
   },
 });
@@ -182,7 +184,7 @@ function App() {
 
         {!revealed && (
           <>
-            <Photo src="/parents-illustration.png" alt="Cartoon of parents" style={{ marginBottom: "1.5rem" }} />
+            <Photo src={parentsIllustration} alt="Cartoon of parents" style={{ marginBottom: "1.5rem" }} />
             <Scrambled>{scrambledName}</Scrambled>
             <Input
               value={guess}
