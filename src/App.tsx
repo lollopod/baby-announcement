@@ -57,7 +57,7 @@ const Container = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  background: "url('/linz-cartoon-bg.jpg') center/cover no-repeat",
+  //background: "url('/linz-cartoon-bg.jpg') center/cover no-repeat",
   padding: "2rem",
   fontFamily: "$body",
 });
