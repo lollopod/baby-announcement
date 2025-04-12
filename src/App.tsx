@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { styled, createStitches } from "@stitches/react";
-import { CalendarDays, Ruler, Weight, Download, LucideExternalLink } from "lucide-react";
+import { Clock, CalendarDays, Ruler, Weight, Download, LucideExternalLink } from "lucide-react";
 import html2canvas from "html2canvas";
 import { keyframes } from "@stitches/react";
 
@@ -48,36 +48,40 @@ const translations = {
     intro: "Can you guess our baby's name? Unscramble the letters!",
     button: "Guess",
     correct: `Correct! Meet ${babyName}`,
-    details: ["April 10, 2025", "3.2kg", "50cm"],
+    details: ["10:45", "April 10, 2025", "3.2kg", "50cm"],
     wrong: "Oops! Try again.",
-    download: "Download keepsake image"
+    download: "Download keepsake image",
+    type: "Type your guess..."
   },
   pt: {
     welcome: "Estamos muito felizes em anunciar...",
     intro: "Você consegue adivinhar o nome do nosso bebê? Desembaralhe as letras!",
     button: "Adivinhar",
     correct:`Correto! Conheça ${babyName}`,
-    details: ["10 de abril de 2025", "3,2kg", "50cm"],
+    details: ["10:45", "10 de abril de 2025", "3,2kg", "50cm"],
     wrong: "Ops! Tente novamente.",
-    download: "Baixar imagem comemorativa"
+    download: "Baixar imagem comemorativa",
+    type: "Digite o seu palpite..."
   },
   it: {
     welcome: "Siamo felicissimi di annunciare...",
     intro: "Riesci a indovinare il nome del nostro bambino? Riordina le lettere!",
     button: "Indovina",
     correct: `Esatto! Ecco ${babyName}`,
-    details: ["10 aprile 2025", "3,2kg", "50cm"],
+    details: ["10:45", "10 aprile 2025", "3,2kg", "50cm"],
     wrong: "Ops! Riprova.",
-    download: "Scarica l'immagine ricordo"
+    download: "Scarica l'immagine ricordo",
+    type: "Scrivi il tuo tentativo..."
   },
   de: {
     welcome: "Wir freuen uns sehr, bekannt zu geben...",
     intro: "Kannst du den Namen unseres Babys erraten? Sortiere die Buchstaben!",
     button: "Raten",
     correct: `Richtig! Hier ist ${babyName}`,
-    details: ["10. April 2025", "3,2kg", "50cm"],
+    details: ["10:45", "10. April 2025", "3,2kg", "50cm"],
     wrong: "Ups! Versuch es nochmal.",
-    download: "Erinnerungsbild herunterladen"
+    download: "Erinnerungsbild herunterladen",
+    type: "Gib deinen Tipp ein..."
   },
 };
 
@@ -182,6 +186,11 @@ const Photo = styled("img", {
   borderRadius: "20px",
   border: "6px dashed",
   borderImage: "linear-gradient(45deg, #f7b7a3, #fdd692, #a3d9f7, #c6f6d5) 1",
+});
+
+const PhotoNoBorder = styled("img", {
+  marginTop: "1.5rem",
+  width: "100%"
 });
 
 const ErrorBanner = styled("div", {
@@ -335,7 +344,7 @@ function App() {
                 setShakeInput(false); // Reset shake when typing
               }}
               shake={shakeInput}
-              placeholder="Type your guess..."
+              placeholder={t.type}
             />
             <Button onClick={handleGuess}>
               {t.button}
@@ -365,13 +374,16 @@ function App() {
                 textAlign: "center"
               }}>
                 <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <CalendarDays size={20} /> {t.details[0]}
+                  <Clock size={20} /> {t.details[0]}
                 </li>
                 <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <Weight size={20} /> {t.details[1]}
+                  <CalendarDays size={20} /> {t.details[1]}
                 </li>
                 <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <Ruler size={20} /> {t.details[2]}
+                  <Weight size={20} /> {t.details[2]}
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Ruler size={20} /> {t.details[3]}
                 </li>
               </ul>
             <PhotoWrapper>
@@ -379,12 +391,13 @@ function App() {
             </PhotoWrapper>
             <div ref={exportRef} style={{ position: "absolute", left: "-9999px", top: 0 }}>
               <PhotoWrapper>
-                <Photo src={babyPhoto} alt="Our baby" />
-                  <OverlayInfo>
-                    <OverlayItem><CalendarDays size="2em" />{t.details[0]}</OverlayItem>
-                    <OverlayItem><Weight size="2em" />{t.details[1]}</OverlayItem>
-                    <OverlayItem><Ruler size="2em" />{t.details[2]}</OverlayItem>
-                  </OverlayInfo>
+                <PhotoNoBorder src={babyPhoto} alt="Our baby" />
+                 {/*  <OverlayInfo>
+                    <OverlayItem><Clock size="2em" />{t.details[0]}</OverlayItem>
+                    <OverlayItem><CalendarDays size="2em" />{t.details[1]}</OverlayItem>
+                    <OverlayItem><Weight size="2em" />{t.details[2]}</OverlayItem>
+                    <OverlayItem><Ruler size="2em" />{t.details[3]}</OverlayItem>
+                  </OverlayInfo> */}
               </PhotoWrapper>
             </div>
             <DownloadButton onClick={handleDownload}>
