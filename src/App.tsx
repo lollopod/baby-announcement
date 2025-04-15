@@ -47,8 +47,8 @@ const translations = {
     welcome: "We're thrilled to announce...",
     intro: "Can you guess our baby's name? Unscramble the letters!",
     button: "Guess",
-    correct: `Correct! Meet ${babyName}. Mum and baby are doing great!`,
-    details: ["10:45", "April 14, 2025", "3.8kg", "50cm"],
+    correct: `Correct! Meet ${babyName}. Dad, Mum and baby are doing good!`,
+    details: ["16:10", "April 14, 2025", "3.45kg", "51cm"],
     wrong: "Oops! Try again.",
     download: "Download keepsake image",
     type: "Type your guess..."
@@ -57,8 +57,8 @@ const translations = {
     welcome: "Estamos muito felizes em anunciar...",
     intro: "Você consegue adivinhar o nome do nosso bebê? Desembaralhe as letras!",
     button: "Adivinhar",
-    correct:`Correto! Conheça ${babyName}. Mae e ninho estao muito bem!`,
-    details: ["10:45", "14 de abril de 2025", "3,2kg", "50cm"],
+    correct:`Correto! Conheça ${babyName}. Papai, mamãe e bebês estão bem!`,
+    details: ["16:10", "14 de abril de 2025", "3,45kg", "51cm"],
     wrong: "Ops! Tente novamente.",
     download: "Baixar imagem comemorativa",
     type: "Digite o seu palpite..."
@@ -67,8 +67,8 @@ const translations = {
     welcome: "Siamo felicissimi di annunciare...",
     intro: "Riesci a indovinare il nome del nostro bambino? Riordina le lettere!",
     button: "Indovina",
-    correct: `Esatto! Ecco ${babyName}. La mamma e il bebe stanno benone!`,
-    details: ["10:45", "14 aprile 2025", "3,2kg", "50cm"],
+    correct: `Esatto! Ecco ${babyName}. Babbo, Mamma e bimbo stanno bene!`,
+    details: ["16:10", "14 aprile 2025", "3,45kg", "51cm"],
     wrong: "Ops! Riprova.",
     download: "Scarica l'immagine ricordo",
     type: "Scrivi il tuo tentativo..."
@@ -77,8 +77,8 @@ const translations = {
     welcome: "Wir freuen uns sehr, bekannt zu geben...",
     intro: "Kannst du den Namen unseres Babys erraten? Sortiere die Buchstaben!",
     button: "Raten",
-    correct: `Richtig! Hier ist ${babyName}. Mama und kind sind sehr gut!`,
-    details: ["10:45", "14. April 2025", "3,2kg", "50cm"],
+    correct: `Richtig! Hier ist ${babyName}. Papa, Mama und Baby geht es gut!`,
+    details: ["16:10", "14. April 2025", "3,45kg", "51cm"],
     wrong: "Ups! Versuch es nochmal.",
     download: "Erinnerungsbild herunterladen",
     type: "Gib deinen Tipp ein..."
